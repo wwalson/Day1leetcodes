@@ -1,0 +1,63 @@
+176. Second Highest Salary
+
+/* Write your T-SQL query statement below */
+
+ SELECT MAX(Salary) AS SecondHighestSalary
+FROM Employee
+WHERE Salary < (SELECT MAX(Salary) FROM Employee)
+
+
+181. Employees Earning More Than Their Managers
+
+/* Write your T-SQL query statement below */
+
+SELECT
+   a.Name as 'Employee'
+FROM
+    Employee AS a,
+    Employee AS b
+WHERE
+    a.ManagerId = b.Id
+    AND a.Salary > b.Salary
+    
+182. Duplicate Emails
+
+/* Write your T-SQL query statement below */
+
+select Email from (
+Select Email, count(Email) as number
+    from Person
+    Group by Email
+)t
+
+where number > 1
+
+183. Customers Who Never Order
+
+/* Write your T-SQL query statement below */
+
+SELECT
+c.Name AS Customers
+FROM customers AS c
+LEFT JOIN orders AS o
+ON c.id = o.customerid
+WHERE o.customerid IS NULL;
+
+
+197. Rising Temperature
+
+/* Write your T-SQL query statement below */
+
+SELECT
+
+w.id AS id
+
+FROM
+
+weather
+
+    
+JOIN weather w 
+ON DATEDIFF(day, weather.recordDate, w.recordDate) = 1
+
+    where weather.Temperature < w.Temperature
